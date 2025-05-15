@@ -21,13 +21,108 @@
     </header>
 
     <div class="main-content">
-      <div class="zodiac-container">
-        <h2>Zodiac Chart</h2>
-        <div id="zodiac-chart" class="chart-container"></div>
+      <!-- Birth data input section -->
+      <div class="birth-data-section">
+        <h2>Birth Data</h2>
+        <div class="date-inputs">
+          <div class="date-time-group">
+            <div class="input-group">
+              <label for="birth-date">Birth Date</label>
+              <input type="date" id="birth-date" name="birth-date">
+            </div>
+            <div class="time-inputs">
+              <div class="time-input-group">
+                <label for="birth-hour">Hour</label>
+                <input type="number" id="birth-hour" name="birth-hour" min="0" max="23" value="7">
+              </div>
+              <div class="time-input-group">
+                <label for="birth-minute">Min</label>
+                <input type="number" id="birth-minute" name="birth-minute" min="0" max="59" value="27">
+              </div>
+            </div>
+          </div>
+
+          <div class="date-time-group">
+            <div class="input-group">
+              <label for="transit-date">Current Date <span class="auto-update-label">(Auto)</span></label>
+              <input type="date" id="transit-date" name="transit-date" class="auto-updated-field">
+            </div>
+            <div class="time-inputs">
+              <div class="time-input-group">
+                <label for="transit-hour">Hour <span class="auto-update-label">(Auto)</span></label>
+                <input type="number" id="transit-hour" name="transit-hour" min="0" max="23" class="auto-updated-field">
+              </div>
+              <div class="time-input-group">
+                <label for="transit-minute">Min <span class="auto-update-label">(Auto)</span></label>
+                <input type="number" id="transit-minute" name="transit-minute" min="0" max="59" class="auto-updated-field">
+              </div>
+            </div>
+          </div>
+
+          <button type="button" id="calculate-btn">Update Chart</button>
+        </div>
+      </div>
+
+      <!-- Section pour le zodiaque normal 360° -->
+      <div class="circular-zodiac-section full-zodiac-section">
+        <h2>Complete Zodiac Chart (360° Mode)</h2>
+        <div class="zodiac-description">
+          <p>This chart shows the actual positions of planets in the complete 360° zodiac wheel with all 12 signs.</p>
+        </div>
+        <div class="circular-zodiac-container">
+          <canvas id="full-zodiac-canvas"></canvas>
+          <div id="full-zodiac-tooltip" class="planet-tooltip"></div>
+        </div>
+        <div class="zodiac-legend">
+          <div class="legend-item birth-legend">
+            <div class="legend-symbol" style="border-color: #d63031;"></div>
+            <span>Birth Chart</span>
+          </div>
+          <div class="legend-item transit-legend">
+            <div class="legend-symbol" style="border-color: #0984e3;"></div>
+            <span>Current Transits</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Section pour le zodiaque circulaire proportionnel -->
+      <div class="circular-zodiac-section">
+        <h2>Proportional Zodiac Chart (30° Mode)</h2>
+        <div class="zodiac-description">
+          <p>This chart shows planets positioned by their degree within their sign (0-30°), regardless of the sign itself.</p>
+        </div>
+        <div class="circular-zodiac-container">
+          <canvas id="circular-zodiac-canvas"></canvas>
+          <div id="planet-tooltip" class="planet-tooltip"></div>
+        </div>
+        <div class="zodiac-legend">
+          <div class="legend-item birth-legend">
+            <div class="legend-symbol" style="border-color: #d63031;"></div>
+            <span>Birth Chart</span>
+          </div>
+          <div class="legend-item transit-legend">
+            <div class="legend-symbol" style="border-color: #0984e3;"></div>
+            <span>Current Transits</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Section pour le chart principal (caché mais nécessaire pour le code) -->
+      <div class="chart-section" style="display: none;">
+        <canvas id="chart-canvas"></canvas>
+      </div>
+
+      <!-- Aspects list (caché mais nécessaire pour le code) -->
+      <div id="aspects-list" style="display: none;">
+        <!-- Aspects will be inserted here -->
       </div>
     </div>
   </div>
 
-  <script type="module" src="./src/js/app.js"></script>
+  <script src="./src/js/planets.js"></script>
+  <script src="./src/js/ephemerides.js"></script>
+  <script src="./src/js/stars.js"></script>
+  <script src="./src/js/daily-aspects.js"></script>
+  <script src="./src/js/app.js"></script>
 </body>
 </html>
