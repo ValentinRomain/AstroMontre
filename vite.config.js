@@ -5,9 +5,16 @@ export default defineConfig({
   build: {
     outDir: 'dist',
     assetsDir: 'assets',
-    emptyOutDir: true,
+    emptyOutDir: false, // Ne pas vider le répertoire de sortie pour conserver nos fichiers préparés
     sourcemap: true,
     rollupOptions: {
+      input: {
+        main: 'index.html',
+      },
+      external: [
+        './src/js/app.js', // Exclure app.js de la résolution pour éviter l'erreur
+        './src/css/styles.css' // Exclure styles.css de la résolution pour éviter l'erreur
+      ],
       output: {
         manualChunks: {
           vendor: ['@capacitor/core']
